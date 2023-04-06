@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int       @id @default(autoincrement())
+  email       String    @unique
+  name        String?
+  image       String?
+  emailVerified DateTime?
+  progress    UserProgress[]
+  favorites   FavoriteChallenge[]
+  history     ChallengeHistory[]
+}
+
+model Challenge {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  progress    UserProgress[]
+  favorites   FavoriteChallenge[]
+  history     ChallengeHistory[]
+}
+
+model UserProgress {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  challenge   Challenge @relation(fields: [challengeId], references: [id])
+  challengeId Int
+  startDate   DateTime  @default(now())
+  progress    Int       @default(0)
+  completed   Boolean   @default(false)
+}
+
+model FavoriteChallenge {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  challenge   Challenge @relation(fields: [challengeId], references: [id])
+  challengeId Int
+  createdAt   DateTime  @default(now())
+}
+
+model ChallengeHistory {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  challenge   Challenge @relation(fields: [challengeId], references: [id])
+  challengeId Int
+  date        DateTime  @default(now())
+  completed   Boolean   @default(false)
+}
