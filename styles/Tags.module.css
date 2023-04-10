@@ -1,0 +1,16 @@
+.tag {
+    background-color: #5c5cff;
+    border: none;
+    border-radius: 3px;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    margin: 0 5px 5px 0;
+    padding: 3px 6px;
+    transition: background-color 0.3s;
+  }
+  
+  .tag:hover {
+    background-color: #3c3cff;
+  }

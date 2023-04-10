@@ -17,6 +17,7 @@ function EmailNotify ({message}) {
     };
 
     const [email, setEmail] = useState("");
+    const [emailStatus, setEmailStatus] = useState(null);
 
     const handleEmailNotification = async (e) => {
         e.preventDefault();
@@ -29,24 +30,38 @@ function EmailNotify ({message}) {
         const subject = "New Challenge Notification";
         const html = `<p>Hello!</p><p>A new challenge is available: ${message}</p><p>Check it out and keep pushing yourself!</p><p>Best,</p><p>Your Challenge App Team</p>`;
       
-        await sendEmail(email, subject, html);
+        try{
+            await sendEmail(email, subject, html);
+            setEmailStatus("success");
+        }catch(error){
+            setEmailStatus("error");
+        }
         setEmail("");
       };
 
     return (
         <div className={styles.container}>
             <form onSubmit={handleEmailNotification} className={styles.form}>
-            <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className={styles.emailInput}
-            />
-            {errors.email && <p className={styles.error}>{errors.email.message}</p>}
-            <button type="submit" className={styles.notifyButton}>
-                Notify me
-            </button>
+                <p className={styles.descriptionText}>
+                    Receive daily notifications about new challenges!
+                </p>
+                <input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={styles.emailInput}
+                />
+                {errors.email && <p className={styles.error}>{errors.email.message}</p>}
+                <button type="submit" className={styles.notifyButton}>
+                    Notify me!
+                </button>
+                {emailStatus === "success" && (
+                    <p className={styles.successMessage}>Email sent successfully!</p>
+                )}
+                {emailStatus === "error" && (
+                    <p className={styles.errorMessage}>Error sending email. Please try again.</p>
+                )}
             </form>
         </div>
     )

@@ -4,6 +4,7 @@ import EmailNotify from '../components/email-notify';
 import styles  from '../styles/Home.module.css';
 import React, { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
+import Tags from '../components/tags';
 
 //out of comfort zone challenge
 //send this to the dodomen
@@ -44,31 +45,13 @@ function Home ({message}) {
   };
 
   const tags = [
-    "Fitness",
-    "Productivity",
-    "Fun",
-    "Creativity",
-    "Mindfulness",
-    "Health",
-    "Learning",
-    "Relationships",
-    "Finance",
-    "Career",
-    "Environment",
-    "Travel",
-    "Hobbies",
-    "Cooking",
-    "Music",
-    "Reading",
-    "Writing",
-    "Personal Development",
-    "Communication",
-    "Technology",
-    "Spirituality",
-    "Home Organization",
-    "Self-care",
-    "Time Management",
-    "Volunteering",
+    "⛹️‍♀️#Fitness",
+    "⌛#Productivity",
+    "🥗#Health",
+    "📔#Learning",
+    "💷#Finance",
+    "👩‍💻#Personal Development",
+    "🎨#Creativity",
   ];
   
 
@@ -79,7 +62,8 @@ function Home ({message}) {
   return (
     <div className={styles.container}>
       <h1>Challenge of the day!</h1>
-      <Challenge message={message} tags={tags} fetchChallengeByTag={fetchChallengeByTag}/>
+      <Challenge message={message}/>
+      <Tags tags={tags} fetchChallengeByTag={fetchChallengeByTag}/>
       <button className={styles.button} onClick={toggleModal}>
         Challenge someone
       </button>
