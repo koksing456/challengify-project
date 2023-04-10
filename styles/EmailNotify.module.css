@@ -1,0 +1,42 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 20px;
+  }
+  
+  .emailInput {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    border: 2px solid #5c5cff;
+  }
+  
+  .notifyButton {
+    background-color: #5c5cff;
+    border: none;
+    border-radius: 0;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    width: 100%;
+  }
+  
+  .notifyButton:hover {
+    background-color: #3d3db3;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  

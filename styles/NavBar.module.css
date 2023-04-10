@@ -33,3 +33,11 @@
 .span {
     color: #ffffff;
 }
+
+.userImage {
+  width: 40px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover; /* Preserve the aspect ratio while resizing */
+  margin-right: 10px; /* Add some space between the image and the email */
+}

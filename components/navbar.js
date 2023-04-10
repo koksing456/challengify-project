@@ -1,5 +1,4 @@
 
-import React from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import styles from '../styles/NavBar.module.css';
 
@@ -15,6 +14,11 @@ const NavBar = () => {
             )}
             {status !== "loading" && session && (
             <>
+                <img
+                src={session.user.image}
+                alt={`Avatar for ${session.user.name}`}
+                className={styles.userImage}
+                />
                 <span className={styles.span}>{session.user.email}</span>
                 <button className={styles.navButton} onClick={() => signOut()}>Sign Out</button>
             </>

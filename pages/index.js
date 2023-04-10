@@ -1,7 +1,9 @@
 import { Configuration, OpenAIApi } from 'openai';
 import Challenge from '../components/challenge';
+import EmailNotify from '../components/email-notify';
 import styles  from '../styles/Home.module.css';
 import React, { useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 
 //out of comfort zone challenge
 //send this to the dodomen
@@ -9,6 +11,9 @@ import React, { useRef, useState } from 'react';
 function Home ({message}) {
   // State to control the visibility of the modal
   const [showModal, setShowModal] = useState(false);
+  const [selectedTag, setSelectedTag] = useState('');
+
+  const router = useRouter();
 
   // Function to toggle the visibility of the modal
   const toggleModal = () => {
@@ -38,10 +43,43 @@ function Home ({message}) {
     window.open(shareURL, '_blank', 'noopener noreferrer');
   };
 
+  const tags = [
+    "Fitness",
+    "Productivity",
+    "Fun",
+    "Creativity",
+    "Mindfulness",
+    "Health",
+    "Learning",
+    "Relationships",
+    "Finance",
+    "Career",
+    "Environment",
+    "Travel",
+    "Hobbies",
+    "Cooking",
+    "Music",
+    "Reading",
+    "Writing",
+    "Personal Development",
+    "Communication",
+    "Technology",
+    "Spirituality",
+    "Home Organization",
+    "Self-care",
+    "Time Management",
+    "Volunteering",
+  ];
+  
+
+  const fetchChallengeByTag = (tag, e) => {
+    router.push(`/tags/${tag}`);
+  };
+
   return (
     <div className={styles.container}>
       <h1>Challenge of the day!</h1>
-      <Challenge message={message}/>
+      <Challenge message={message} tags={tags} fetchChallengeByTag={fetchChallengeByTag}/>
       <button className={styles.button} onClick={toggleModal}>
         Challenge someone
       </button>
@@ -64,6 +102,7 @@ function Home ({message}) {
           </div>
         </div>
       )}
+      <EmailNotify message={message} />
     </div>
   )
 }
@@ -82,8 +121,6 @@ export async function getStaticProps() {
     apiKey: process.env.OPENAI_API_KEY, // Replace this with your actual OpenAI API key
   });
 
-  console.log("process.env.OPENAI_API_KEY:", process.env.OPENAI_API_KEY);
-  
   const openai = new OpenAIApi(configuration);
   let props = {};
   try {
@@ -97,7 +134,6 @@ export async function getStaticProps() {
       // });
       // const message = chatGPTResponse.data.choices[0].message.content;
       const message = `"30-Day Fitness Challenge": Challenge yourself to exercise for at least 30 minutes every day for the next 30 days. This can include going for a run, doing a yoga class, or even just taking a brisk walk. Keep track of your progress and celebrate each milestone along the way. This challenge will help you establish a regular exercise routine and improve your overall health and wellbeing.`
-      console.log('message:', message);
       props = {message}
   } catch (error) {
       props = {message: 'Error generating challenge'}
