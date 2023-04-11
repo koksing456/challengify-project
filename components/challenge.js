@@ -1,11 +1,10 @@
-import styles from '/styles/Challenge.module.css'
-
-function Challenge ({message}) {
+function Challenge({ message }) {
     return (
-        <div className={styles.challenge}>
-            <p className={styles.challengeMessage}>{message}</p>
-        </div>
-    )
-}
-
-export default Challenge
+      <div className="bg-primary-white border-3 border-dashed border-primary rounded-lg my-5 p-5 text-center animate-float">
+        <p className="text-primary font-pixel text-2xl mb-0 shadow-primary">{message}</p>
+      </div>
+    );
+  }
+  
+export default Challenge;
+  

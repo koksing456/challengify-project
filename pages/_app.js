@@ -6,8 +6,10 @@ export default function App({ Component, pageProps: {session, ...pageProps} }) {
   return (
     <>
       <SessionProvider session={session}>
-        <NavBar />
-        <Component {...pageProps} />
+        <div className="bg-gray-900 min-h-screen text-white">
+          <NavBar />
+          <Component {...pageProps} />
+        </div>
       </SessionProvider>
     </>
   )

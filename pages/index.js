@@ -1,8 +1,7 @@
 import { Configuration, OpenAIApi } from 'openai';
 import Challenge from '../components/challenge';
 import EmailNotify from '../components/email-notify';
-import styles  from '../styles/Home.module.css';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Tags from '../components/tags';
 
@@ -60,27 +59,27 @@ function Home ({message}) {
   };
 
   return (
-    <div className={styles.container}>
-      <h1>Challenge of the day!</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 font-pixel">
+      <h1 className="mb-5 text-white">Challenge of the day!</h1>
       <Challenge message={message}/>
       <Tags tags={tags} fetchChallengeByTag={fetchChallengeByTag}/>
-      <button className={styles.button} onClick={toggleModal}>
+      <button className="bg-secondary hover:bg-button-hover transition-colors duration-300 py-2 px-4 text-white font-pixel rounded-none cursor-pointer" onClick={toggleModal}>
         Challenge someone
       </button>
       {showModal && (
-        <div className={styles.modal}>
-          <div className={styles.modalContent}>
-            <button className={styles.closeButton} onClick={toggleModal}>
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 flex items-center justify-center">
+          <div className="bg-white p-5 text-center w-11/12 max-w-md rounded-md relative">
+            <button className="bg-transparent text-black font-bold text-2xl cursor-pointer absolute top-1 right-1" onClick={toggleModal}>
               &times;
             </button>
             <h2>Share on:</h2>
-            <button className={styles.shareButton} onClick={() => share('twitter')}>
+            <button className="bg-secondary hover:bg-button-hover transition-colors duration-300 w-full py-2 px-4 text-white font-pixel rounded-none cursor-pointer mb-2" onClick={() => share('twitter')}>
               Twitter
             </button>
-            <button className={styles.shareButton} onClick={() => share('facebook')}>
+            <button className="bg-secondary hover:bg-button-hover transition-colors duration-300 w-full py-2 px-4 text-white font-pixel rounded-none cursor-pointer mb-2" onClick={() => share('facebook')}>
               Facebook
             </button>
-            <button className={styles.shareButton} onClick={() => share('whatsapp')}>
+            <button className="bg-secondary hover:bg-button-hover transition-colors duration-300 w-full py-2 px-4 text-white font-pixel rounded-none cursor-pointer" onClick={() => share('whatsapp')}>
               WhatsApp
             </button>
           </div>

@@ -1,10 +1,3 @@
-body {
-  /* Set a retro background color */
-  background-color: #1f1f1f;
-}
-
-h1 {
-  margin-bottom: 20px;
-  /* Set a retro color for the text */
-  color: #ffffff;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

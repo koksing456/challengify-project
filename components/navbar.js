@@ -16,7 +16,7 @@ const NavBar = () => {
                 height={128} // adjust the height as needed
                 />
             </div>
-            <h1>Challengify</h1>
+            <h1 className='mb-5 text-white'>Challengify</h1>
             <nav>
                 {status !== "loading" && !session && (
                     <button className={styles.navButton} onClick={() => signIn()}>Log In</button>
