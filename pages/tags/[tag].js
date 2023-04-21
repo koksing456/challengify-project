@@ -29,6 +29,19 @@ export async function getServerSideProps(context) {
     //   const message = chatGPTResponse.data.choices[0].message.content;
         const message = promptText;
       props = { message };
+
+      //fetch challenge from supabase
+      const { data, error } = await supabase
+      .from('challenges')
+      .select('*')
+      .eq('tag', tag)
+      .order('id', { ascending: false })
+      .limit(1);
+      if (error) throw error;
+      if (data) {
+        props = { ...props, challenge: data[0] };
+      }
+
     } catch (error) {
       props = { message: 'Error generating challenge' };
       console.error('Error sending prompt to ChatGPT API:', error.message);

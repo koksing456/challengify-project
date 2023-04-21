@@ -4,11 +4,12 @@ import EmailNotify from '../components/email-notify';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Tags from '../components/tags';
+import { supabase } from './../lib/supabaseClient';
 
 //out of comfort zone challenge
 //send this to the dodomen
 
-function Home ({message}) {
+function Home ({challenges}) {
   // State to control the visibility of the modal
   const [showModal, setShowModal] = useState(false);
   const [selectedTag, setSelectedTag] = useState('');
@@ -22,7 +23,7 @@ function Home ({message}) {
 
   const share = (platform) => {
     const url = window.location.href;
-    const text = encodeURIComponent(`${message} - Check out this challenge!`);
+    const text = encodeURIComponent(`${challenges[0].description} - Check out this challenge!`);
 
     let shareURL = '';
 
@@ -44,12 +45,11 @@ function Home ({message}) {
   };
 
   const tags = [
+    "👾#Social Media",
     "⛹️‍♀️#Fitness",
     "⌛#Productivity",
     "🥗#Health",
-    "📔#Learning",
     "💷#Finance",
-    "👩‍💻#Personal Development",
     "🎨#Creativity",
   ];
   
@@ -59,9 +59,10 @@ function Home ({message}) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 font-pixel">
+
+<div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 font-pixel">
       <h1 className="mb-5 text-white">Challenge of the day!</h1>
-      <Challenge message={message}/>
+      <Challenge message={challenges[0].description}/>
       <Tags tags={tags} fetchChallengeByTag={fetchChallengeByTag}/>
       <button className="bg-secondary hover:bg-button-hover transition-colors duration-300 py-2 px-4 text-white font-pixel rounded-none cursor-pointer" onClick={toggleModal}>
         Challenge someone
@@ -85,10 +86,11 @@ function Home ({message}) {
           </div>
         </div>
       )}
-      <EmailNotify message={message} />
+      <EmailNotify message={challenges[0].description} />
     </div>
   )
 }
+
 
 
 //a button to share the challeange to social media
@@ -98,16 +100,50 @@ function Home ({message}) {
 
 export default Home
 
+async function getChallengeForTag(tag) {
+    try {
+        let { data } = await supabase
+        .from('Challenge')
+        .select('*')
+        .eq('tag', tag)
+        .eq('had_displayed', false)
+        .order('id', { ascending: true })
+        .limit(1)
+        .single();
+
+        // if (data) {
+        //     await supabase
+        //       .from('Challenge')
+        //       .update({ had_displayed: true })
+        //       .eq('id', data.id);
+        // }
+
+        return data;
+    } catch (error) {
+        console.error(`Error fetching challenge for tag ${tag}:`, error);
+        return null;
+    }
+}
+
 //will need to decide to use getServerProps 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY, // Replace this with your actual OpenAI API key
   });
 
   const openai = new OpenAIApi(configuration);
   let props = {};
+  let challenges = [];
+  const tags = [
+    "social meida",
+    "fitness",
+    "productivity",
+    "health",
+    "finance",
+    "creativity",
+  ];
   try {
-      const promptText = `Generate a challenge idea for today.`;
+    //   const promptText = `Generate a challenge idea for today.`;
       //enable below in production, now is to save costs
       // const chatGPTResponse = await openai.createChatCompletion({
       //     model: 'gpt-3.5-turbo',
@@ -116,10 +152,20 @@ export async function getStaticProps() {
       //     ],
       // });
       // const message = chatGPTResponse.data.choices[0].message.content;
-      const message = `"30-Day Fitness Challenge": Challenge yourself to exercise for at least 30 minutes every day for the next 30 days. This can include going for a run, doing a yoga class, or even just taking a brisk walk. Keep track of your progress and celebrate each milestone along the way. This challenge will help you establish a regular exercise routine and improve your overall health and wellbeing.`
-      props = {message}
+
+      for (const tag of tags) {
+        console.log("tag: ", tag);
+        const challenge = await getChallengeForTag(tag);
+        console.log("challenge: ", challenge);
+        if (challenge) {
+          challenges.push(challenge);
+        }
+      }
+
+      console.log("challenges: ", challenges);
+      props = {challenges}
   } catch (error) {
-      props = {message: 'Error generating challenge'}
+      props = {challenges: 'Error generating challenge'}
       console.error('Error sending prompt to ChatGPT API:', error.message);
       console.error('Error details:', error);
   }

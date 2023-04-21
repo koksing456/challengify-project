@@ -1,22 +1,17 @@
-import styles from '/styles/Tags.module.css'
-
-function Tags ({message, tags, fetchChallengeByTag}) {
+function Tags ({tags, fetchChallengeByTag}) {
     return (
-        <div className={styles.challenge}>
-            <p className={styles.challengeMessage}>{message}</p>
-            <div className={styles.tags}>
-                {tags.map((tag, index) => (
-                    <button
-                        key={index}
-                        className={styles.tag}
-                        onClick={() => {
-                            fetchChallengeByTag(tag);
-                        }}
-                        >
-                        {tag}
-                    </button>
-                ))}
-            </div>
+        <div>
+            {tags.map((tag, index) => (
+                <button
+                    key={index}
+                    className="bg-secondary border-none border-radius-3 text-primary-white cursor-pointer font-pixel text-sm mx-4 my-4 py-0.5 px-1.5"
+                    onClick={() => {
+                        fetchChallengeByTag(tag);
+                    }}
+                    >
+                    {tag}
+                </button>
+            ))}
         </div>
     )
 }

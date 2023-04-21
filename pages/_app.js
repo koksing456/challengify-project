@@ -7,7 +7,7 @@ export default function App({ Component, pageProps: {session, ...pageProps} }) {
     <>
       <SessionProvider session={session}>
         <div className="bg-gray-900 min-h-screen text-white">
-          <NavBar />
+          {/* <NavBar /> */}
           <Component {...pageProps} />
         </div>
       </SessionProvider>
