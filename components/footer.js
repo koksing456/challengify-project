@@ -1,10 +1,23 @@
+import Image from 'next/image';
+
 function Footer() {
     return (
-        <section class="py-10 bg-gray-50 sm:pt-16 lg:pt-24">
-            <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-                <div class="grid grid-cols-2 md:col-span-3 lg:grid-cols-6 gap-y-16 gap-x-12">
+        <section class="pb-10 bg-gray-50  ">
+            <div class="">
+                {/* <div class="grid grid-cols-2 md:col-span-3 lg:grid-cols-6 gap-y-16 gap-x-12">
                     <div class="col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
-                        <img class="w-auto h-9" src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg" alt="" />
+                        <div className="flex-shrink-0">
+                            <a href="#" title="" className="flex items-center">
+                                <img
+                                    src="https://img.icons8.com/ios/50/null/super-mario.png"
+                                    alt="Super Mario Icon"
+                                    className="w-8 h-8 lg:w-10 lg:h-10 mr-2"
+                                />
+                                <p className=" text-black font-semibold text-2xl">
+                                    Challengify
+                                </p>
+                            </a>
+                        </div>
 
                         <p class="text-base leading-relaxed text-gray-600 mt-7">Unlock your full potential with Challengify, a platform where you can participate in challenges and improve your skills.</p>
 
@@ -109,11 +122,31 @@ function Footer() {
                             <button type="submit" class="inline-flex items-center justify-center px-6 py-4 mt-3 font-semibold text-white transition-all duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:bg-blue-700">Subscribe</button>
                         </form>
                     </div>
-                </div>
+                </div> */}
 
-                <hr class="mt-16 mb-10 border-gray-200" />
+                <hr class=" mb-10 border-gray-200" />
 
                 <p class="text-sm text-center text-gray-600">© Copyright 2023 Challengify</p>
+                <footer className="fixed bottom-0 right-0 mb-4 mr-4">
+                    <a
+                        href="https://twitter.com/koksing10"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-2 text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-full transition-all duration-300 ease-in-out shadow-md transform hover:scale-110 hover:-rotate-3 hover:shadow-lg animate-slideIn"
+                    >
+                        <i className="fab fa-twitter text-xl"></i>
+                        <span>Created by</span>
+                        <div className="relative w-8 h-8 overflow-hidden rounded-full">
+                            <Image
+                                src="/profile-pic.jpg"
+                                alt="Profile Picture"
+                                layout="fill"
+                                objectFit="cover"
+                            />
+                        </div>
+                        <span>@koksing10</span>
+                    </a>
+                </footer>
             </div>
         </section>
     )

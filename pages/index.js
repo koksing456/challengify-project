@@ -124,7 +124,8 @@ async function getChallengeForTag(tag) {
         // if (data) {
         //     await supabase
         //       .from('Challenge')
-        //       .update({ had_displayed: true })
+        //       .update({ had_displayed: true,
+        //                 display_date: new Date() })
         //       .eq('id', data.id);
         // }
 

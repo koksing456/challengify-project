@@ -1,7 +1,7 @@
 function Guide() {
     return (
         <div>
-            <section class="py-10 bg-white sm:py-16 lg:py-24">
+            <section id="how-it-works" class="py-10 bg-white sm:py-16 lg:py-24">
                 <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div class="max-w-2xl mx-auto text-center">
                         <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">How does Challngify work?</h2>
