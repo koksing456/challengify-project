@@ -110,24 +110,19 @@ export default Home
 async function getChallengeForTag(tag) {
     try {
         console.log(`Fetching challenge for tag ${tag}...`);
+
+        const today = new Date();
+        today.setHours(9, 0, 0, 0);
+
         let { data } = await supabase
             .from('Challenge')
             .select('*')
             .eq('tag', tag)
-            .eq('had_displayed', false)
-            .order('id', { ascending: true })
-            .limit(1)
+            .gte('display_date', today)
+            .lte('display_date', today)
             .single();
 
         console.log('Challenge data:', data);
-
-        // if (data) {
-        //     await supabase
-        //       .from('Challenge')
-        //       .update({ had_displayed: true,
-        //                 display_date: new Date() })
-        //       .eq('id', data.id);
-        // }
 
         return data;
     } catch (error) {

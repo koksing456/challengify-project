@@ -1,0 +1,13 @@
+name: Update Challenge
+
+on:
+  schedule:
+    - cron: '0 9 * * *' # Runs every day at 9 am UTC
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Update Challenge API
+        run: |
+          curl -X POST -H "Content-Type: application/json" -H "x-scheduler-secret: ${{ secrets.SCHEDULER_SECRET_KEY }}" ${{ secrets.UPDATE_CHALLENGE_API_URL }}
