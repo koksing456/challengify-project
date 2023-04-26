@@ -1,9 +1,10 @@
 import '@/styles/globals.css'
+import { Analytics } from '@vercel/analytics/react';
 import NavBar from '../components/navbar'
 import Header from '@/components/header';
 import { SessionProvider } from 'next-auth/react';
 
-export default function App({ Component, pageProps: {session, ...pageProps} }) {
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <>
       <SessionProvider session={session}>
@@ -11,6 +12,7 @@ export default function App({ Component, pageProps: {session, ...pageProps} }) {
           {/* <NavBar /> */}
           <Header />
           <Component {...pageProps} />
+          <Analytics />
         </div>
       </SessionProvider>
     </>
