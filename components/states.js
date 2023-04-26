@@ -1,30 +1,31 @@
 import { useState, useEffect } from 'react';
+import { supabase } from './../lib/supabaseClient';
 
 function States() {
     const [counter, setCounter] = useState({ challenges: 0, shared: 0, success: 0 });
 
     useEffect(() => {
-        const target = { challenges: 6, shared: 200, success: 37 };
+        const fetchCounterData = async () => {
+            const { data, error } = await supabase
+                .from('Challenge')
+                .select('had_displayed, total_share');
+            
+            if (error) {
+                console.error('Error fetching data:', error);
+                return;
+            }
 
-        const interval = setInterval(() => {
-            setCounter((prevState) => {
-                const updatedState = { ...prevState };
+            const challenges = data.filter(item => item.had_displayed).length;
+            const shared = data.reduce((acc, item) => acc + item.total_share, 0);
 
-                if (updatedState.challenges < target.challenges) {
-                    updatedState.challenges++;
-                }
-                if (updatedState.shared < target.shared) {
-                    updatedState.shared += Math.floor(Math.random() * 50);
-                }
-                if (updatedState.success < target.success) {
-                    updatedState.success++;
-                }
+            setCounter(prevState => ({
+                ...prevState,
+                challenges: challenges,
+                shared: shared
+            }));
+        };
 
-                return updatedState;
-            });
-        }, 100);
-
-        return () => clearInterval(interval);
+        fetchCounterData();
     }, []);
 
     return (
@@ -44,7 +45,7 @@ function States() {
                     <div className="p-6 bg-white shadow-md hover:shadow-lg transition-all duration-300 rounded-xl">
                         <h3 className="font-bold text-7xl">
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600">
-                                {counter.challenges}+
+                                {counter.challenges}
                             </span>
                         </h3>
                         <p className="mt-4 text-xl font-medium text-gray-900">Challenges Generated</p>
@@ -64,7 +65,7 @@ function States() {
                     <div className="p-6 bg-white shadow-md hover:shadow-lg transition-all duration-300 rounded-xl">
                         <h3 className="font-bold text-7xl">
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600">
-                                {counter.success}+
+                                {counter.success}
                             </span>
                         </h3>
                         <p className="mt-4 text-xl font-medium text-gray-900">Success Stories Shared</p>

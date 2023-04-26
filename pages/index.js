@@ -94,7 +94,7 @@ function Home({ challenges }) {
             </button>
             {showModal && shareModal()} */}
             {/* <EmailNotify message={challenges[0].description} /> */}
-            <ChallengeView challenges={challenges}/>
+            <ChallengeView challenges={challenges} />
             <States />
             <Guide />
             {/* <Faq /> */}

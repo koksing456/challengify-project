@@ -132,11 +132,11 @@ function Footer() {
                         href="https://twitter.com/koksing10"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center space-x-2 text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-full transition-all duration-300 ease-in-out shadow-md transform hover:scale-110 hover:-rotate-3 hover:shadow-lg animate-slideIn"
+                        className="flex items-center space-x-2 text-sm text-white bg-blue-500 hover:bg-blue-600 px-3 py-1.5 rounded-full transition-all duration-300 ease-in-out shadow-md transform hover:scale-110 hover:-rotate-3 hover:shadow-lg animate-slideIn"
                     >
-                        <i className="fab fa-twitter text-xl"></i>
-                        <span>Created by</span>
-                        <div className="relative w-8 h-8 overflow-hidden rounded-full">
+                        <i className="fab fa-twitter text-lg"></i>
+                        <span className="font-semibold">Created by</span>
+                        <div className="relative w-6 h-6 overflow-hidden rounded-full border-2 border-white">
                             <Image
                                 src="/profile-pic.jpg"
                                 alt="Profile Picture"
@@ -144,9 +144,10 @@ function Footer() {
                                 objectFit="cover"
                             />
                         </div>
-                        <span>@koksing10</span>
+                        <span className="font-semibold">@koksing10</span>
                     </a>
                 </footer>
+
             </div>
         </section>
     )
