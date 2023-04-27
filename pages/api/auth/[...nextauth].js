@@ -35,4 +35,5 @@ export default NextAuth({
         //email
         
     ],
+    secret: process.env.NEXT_AUTH_SECRET,
 });
