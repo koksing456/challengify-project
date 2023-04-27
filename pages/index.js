@@ -112,14 +112,21 @@ async function getChallengeForTag(tag) {
         console.log(`Fetching challenge for tag ${tag}...`);
 
         const today = new Date();
-        today.setHours(9, 0, 0, 0);
+        const dateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const dateString = dateOnly.toISOString().split("T")[0];
+
+        console.log('Date only:', dateString);
+
 
         let { data } = await supabase
             .from('Challenge')
             .select('*')
             .eq('tag', tag)
-            .gte('display_date', today)
-            .lte('display_date', today)
+            .eq('had_displayed', true)
+            .gte('display_date', dateString)
+            .lte('display_date', dateString)
+            .order('id', { ascending: true })
+            .limit(1)
             .single();
 
         console.log('Challenge data:', data);
