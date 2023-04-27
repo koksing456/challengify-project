@@ -3,11 +3,18 @@ name: Update Challenge
 on:
   schedule:
     - cron: '0 9 * * *' # Runs every day at 9 am UTC
+  workflow_dispatch:
 
 jobs:
   trigger:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Update Challenge API
+        id: trigger_update_challenge
         run: |
-          curl -X POST -H "Content-Type: application/json" -H "x-scheduler-secret: ${{ secrets.SCHEDULER_SECRET_KEY }}" ${{ secrets.UPDATE_CHALLENGE_API_URL }}
+          RESPONSE=$(curl -s -i -w "\n%{http_code}" -X POST -H "Content-Type: application/json" -H "x-scheduler-secret: ${{ secrets.SCHEDULER_SECRET_KEY }}" ${{ secrets.UPDATE_CHALLENGE_API_URL }})
+          echo "RESPONSE=$RESPONSE" >> $GITHUB_OUTPUT
+
+      - name: Check POST request success
+        run: |
+          echo "Response code: ${{steps.trigger_update_challenge.outputs.RESPONSE}}

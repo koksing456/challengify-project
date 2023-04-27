@@ -123,8 +123,8 @@ async function getChallengeForTag(tag) {
             .select('*')
             .eq('tag', tag)
             .eq('had_displayed', true)
-            .gte('display_date', dateString)
-            .lte('display_date', dateString)
+            .gte('display_date', "2023-04-26")
+            .lte('display_date', "2023-04-26")
             .order('id', { ascending: true })
             .limit(1)
             .single();

@@ -2,9 +2,9 @@ import Image from 'next/image';
 
 function Footer() {
     return (
-        <section class="pb-10 bg-gray-50  ">
-            <div class="">
-                {/* <div class="grid grid-cols-2 md:col-span-3 lg:grid-cols-6 gap-y-16 gap-x-12">
+        <section className="pb-10 bg-gray-50  ">
+            <div className="">
+                {/* <div className="grid grid-cols-2 md:col-span-3 lg:grid-cols-6 gap-y-16 gap-x-12">
                     <div class="col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
                         <div className="flex-shrink-0">
                             <a href="#" title="" className="flex items-center">
@@ -124,9 +124,9 @@ function Footer() {
                     </div>
                 </div> */}
 
-                <hr class=" mb-10 border-gray-200" />
+                <hr className=" mb-10 border-gray-200" />
 
-                <p class="text-sm text-center text-gray-600">© Copyright 2023 Challengify</p>
+                <p className="text-sm text-center text-gray-600">© Copyright 2023 Challengify</p>
                 <footer className="fixed bottom-0 right-0 mb-4 mr-4">
                     <a
                         href="https://twitter.com/koksing10"
