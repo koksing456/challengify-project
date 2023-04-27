@@ -2,7 +2,7 @@ name: Update Challenge
 
 on:
   schedule:
-    - cron: '0 9 * * *' # Runs every day at 9 am UTC
+    - cron: '0 0 * * *' # Runs every day at midnight (00:00) UTC
   workflow_dispatch:
 
 jobs:
@@ -12,9 +12,6 @@ jobs:
       - name: Trigger Update Challenge API
         id: trigger_update_challenge
         run: |
-          RESPONSE=$(curl -s -i -w "\n%{http_code}" -X POST -H "Content-Type: application/json" -H "x-scheduler-secret: ${{ secrets.SCHEDULER_SECRET_KEY }}" ${{ secrets.UPDATE_CHALLENGE_API_URL }})
-          echo "RESPONSE=$RESPONSE" >> $GITHUB_OUTPUT
-
-      - name: Check POST request success
-        run: |
-          echo "Response code: ${{steps.trigger_update_challenge.outputs.RESPONSE}}
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/json" -H "x-scheduler-secret: e1234567890wertyuiopasdfghjklzxcvbnmewer" https://challengify.vercel.app/api/update-challenge)
+          echo $RESPONSE
+        

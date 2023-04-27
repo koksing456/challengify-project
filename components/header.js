@@ -3,7 +3,7 @@ import { useState } from 'react';
 function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [logoSrc, setLogoSrc] = useState(
-        'https://img.icons8.com/ios/50/null/super-mario.png'
+        'https://img.icons8.com/cotton/64/null/mushroom.png'
     );
 
     const handleMouseEnter = () => {
@@ -11,7 +11,7 @@ function Header() {
     };
 
     const handleMouseLeave = () => {
-        setLogoSrc('https://img.icons8.com/ios/50/null/super-mario.png');
+        setLogoSrc('https://img.icons8.com/cotton/64/null/mushroom.png');
     };
 
     return (

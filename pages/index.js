@@ -112,7 +112,9 @@ async function getChallengeForTag(tag) {
         console.log(`Fetching challenge for tag ${tag}...`);
 
         const today = new Date();
-        const dateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        console.log('Today:', today);
+        const dateOnly = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+        console.log(dateOnly);
         const dateString = dateOnly.toISOString().split("T")[0];
 
         console.log('Date only:', dateString);
@@ -123,8 +125,8 @@ async function getChallengeForTag(tag) {
             .select('*')
             .eq('tag', tag)
             .eq('had_displayed', true)
-            .gte('display_date', "2023-04-26")
-            .lte('display_date', "2023-04-26")
+            .gte('display_date', dateString)
+            .lte('display_date', dateString)
             .order('id', { ascending: true })
             .limit(1)
             .single();
