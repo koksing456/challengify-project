@@ -139,7 +139,7 @@ function ChallengeView({ challenges }) {
             <p className="mt-12 text-s text-gray-400">#{challenge.tag}</p>
             <div className="mt-4">
                 <TwitterShareButton
-                    text={`🚀 I just accepted the "${challenge.title}" challenge! 🌟 Can you beat me? Let's push our limits together! 💥 Join the challenge here: `}
+                    text={`I just accepted the "${challenge.title}" challenge! 🌟\n\n- ${challenge.description}\n\nJoin the challenge here: `}
                     url={currentUrl}
                     handleShare={handleShare}
                     index={index}
